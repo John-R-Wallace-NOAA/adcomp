@@ -1107,7 +1107,7 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
                      PKG_LIBS=paste(
                        "$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
                      PKG_CXXFLAGS="$(SHLIB_OPENMP_CXXFLAGS)"[openmp],
-                     CXXFLAGS=flags[flags!=""], ## Optionally override cxxflags
+                     CXXFLAGS=c(Makeconf_args_no_Wall, flags[flags!=""]), ## Now flags overrides only those Makeconf cxxflags that are the same 
                      ...
                      )
   on.exit(file.remove(mvfile),add=TRUE)
