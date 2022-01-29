@@ -1102,7 +1102,7 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
      Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
      Makeconf_args_no_Wall <- sub(" \\$\\(DEBUGFLAG\\) ", "", sub("-Wall", "", sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])))
   } else
-     Makeconf_args_no_Wall <- ""
+     Makeconf_args_no_Wall <- character(0)
   mvfile <- makevars(PKG_CPPFLAGS=ppflags,
                      PKG_LIBS=paste(
                        "$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
