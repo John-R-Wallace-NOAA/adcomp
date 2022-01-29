@@ -1014,7 +1014,7 @@ openmp <- function(n=NULL){
 ##' @seealso \code{\link{precompile}}
 compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
                     openmp=isParallelTemplate(file[1]),libtmb=TRUE,
-                    libinit=TRUE,tracesweep=FALSE,...){
+                    libinit=TRUE,tracesweep=FALSE,remove_arg_Wall = TRUE,...){  # < remove_arg_Wall = flags=="" > would give old functionality of 'flag' replacing CXXFLAGS when it is not empty 
   if(.Platform$OS.type=="windows"){
     ## Overload system.file
     system.file <- function(...){
@@ -1097,6 +1097,12 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
                    "-DCPPAD_FORWARD0SWEEP_TRACE"[tracesweep]
                    )
   ## Makevars specific for template
+    Makeconf_file <- paste0(R.home("etc"), "/x64/Makeconf")
+  if(remove_arg_Wall & file.exists(Makeconf_file)) {
+     Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
+     Makeconf_args_no_Wall <- sub(" \\$\\(DEBUGFLAG\\) ", "", sub("-Wall", "", sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])))
+  } else
+     Makeconf_args_no_Wall <- ""
   mvfile <- makevars(PKG_CPPFLAGS=ppflags,
                      PKG_LIBS=paste(
                        "$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
