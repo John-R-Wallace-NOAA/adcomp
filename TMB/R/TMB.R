@@ -1097,17 +1097,20 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
                    "-DCPPAD_FORWARD0SWEEP_TRACE"[tracesweep]
                    )
   ## Makevars specific for template
-    Makeconf_file <- paste0(R.home("etc"), "/x64/Makeconf")
-  if(remove_arg_Wall & file.exists(Makeconf_file)) {
+  Makeconf_file <- paste0(R.home("etc"), "/x64/Makeconf")
+  if(file.exists(Makeconf_file)) {
      Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
-     Makeconf_args_no_Wall <- sub(" \\$\\(DEBUGFLAG\\) ", "", sub("-Wall", "", sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])))
+     if(remove_arg_Wall)
+        Makeconf_args_no_Wall <- sub("-Wall", "", sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)]))
+     else
+       Makeconf_args_no_Wall <- sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])
   } else
      Makeconf_args_no_Wall <- character(0)
   mvfile <- makevars(PKG_CPPFLAGS=ppflags,
                      PKG_LIBS=paste(
                        "$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
                      PKG_CXXFLAGS="$(SHLIB_OPENMP_CXXFLAGS)"[openmp],
-                     CXXFLAGS=c(Makeconf_args_no_Wall, flags[flags!=""]), ## Now flags overrides only those Makeconf cxxflags that are the same 
+                     CXXFLAGS=paste(Makeconf_args_no_Wall,flags[flags!=""]), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste here, not 'c()'.]
                      ...
                      )
   on.exit(file.remove(mvfile),add=TRUE)
