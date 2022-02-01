@@ -19,6 +19,7 @@ There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() funct
         Makeconf_args_no_Wall <- character(0)
         
 Note that in my experience, the '-Wall' argument doesn't always produce excess warnings, however removing the '-Wall' argument never shows the excess warnings.  
-        
+       
+Now the compile()'s argumnet 'flags' overrides only the Makeconf cxxflags that are the same. It does this by being more to the right than the Markeconf flags.
         
 Please test this fork and report any issues, thanks.        
