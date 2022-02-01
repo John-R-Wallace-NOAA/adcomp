@@ -1014,7 +1014,7 @@ openmp <- function(n=NULL){
 ##' @seealso \code{\link{precompile}}
 compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
                     openmp=isParallelTemplate(file[1]),libtmb=TRUE,
-                    libinit=TRUE,tracesweep=FALSE,remove_arg_Wall = TRUE,...){  # < remove_arg_Wall = flags=="" > would give old functionality of 'flag' replacing CXXFLAGS when it is not empty 
+                    libinit=TRUE,tracesweep=FALSE,remove_arg_Wall = TRUE,...){  
   if(.Platform$OS.type=="windows"){
     ## Overload system.file
     system.file <- function(...){
