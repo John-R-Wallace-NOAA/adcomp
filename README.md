@@ -42,8 +42,9 @@ To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 
 
 2) Add the following two lines of code to the compile():
 
-     if(flags=="" & !Makeconf_global)
-          flags <- " "
+
+           if(flags=="" & !Makeconf_global)
+               flags <- " "
 
 ## High strangeness
 
@@ -59,7 +60,7 @@ This call, which still has the '-Wall' flag, with only an extra space between '-
     
 This call with reduced spaces more randomly sometimes gives excess warnings and sometimes not when intermixed with other calls:
 
-   "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
+    "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
 
 
 
