@@ -30,8 +30,9 @@ Note that the current R version's global 'Makeconf' [at location: paste0(R.home(
        
 Please test this fork and report any issues, thanks.     
 
+---
 
-Extra info
+## Extra info
 
 I haven't actually done this (except that flags = " " does work); however it has now occurred to me that:
 
@@ -39,5 +40,24 @@ To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 
 
      if(flags=="" & !Makeconf_global)
           flags <- " "
+
+---
+
+## High strangeness
+
+Submitting these 'g++' calls to a Windows 10 Command Window (cmd) and thus not using R, I have found the follwing:
+
+This call (from an older version of TMB) almost always gives excess warnings as one would expect with the '-Wall' flag:
+
+    "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MKL/MKL/include" -DNDEBUG -I"W:/MKL/MKL/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple         -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign -c simple.cpp -o simple.o
+    
+This call, which still has the '-Wall' flag, with only an extra space between '-mstackrealign' and '-c', almost never gives excess warnings:
+    
+    "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
+    
+This call with reduced spaces more randomly sometimes gives excess warnings and sometimes not when intermixed with other calls:
+
+   "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
+
 
 
