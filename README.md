@@ -5,7 +5,7 @@ This fork adds control to the compile() function (found inside TMB.R) to obtain 
 
 See TMB issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 )
 
-There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() function and the folowing changes are made around lines 1,100 to 1,116:
+There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() function and the following changes are made around lines 1,100 to 1,116:
 
 
     Makeconf_file <- paste0(R.home("etc"), "/x64/Makeconf")
