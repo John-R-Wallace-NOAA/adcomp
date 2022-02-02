@@ -49,7 +49,7 @@ To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 
 
 ## High strangeness
 
-Submitting these 'g++' calls to a Windows 10 Command Window (cmd) and thus not using R, I have found the follwing:
+Submitting these 'g++' calls to a Windows 10 Command Window (cmd) and thus not using R, I have found the follwing on my current PC setup (standard C:/rtools40/mingw64/bin/g++ install):
 
 This call (from an older version of TMB) almost always gives excess warnings as one would expect with the '-Wall' flag:
 
