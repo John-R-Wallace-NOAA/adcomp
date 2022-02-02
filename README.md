@@ -23,16 +23,21 @@ There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() funct
                      ...
                      )     
         
-Note that in my experience, the '-Wall' argument doesn't always produce excess warnings, however removing the '-Wall' argument never shows the excess warnings.  
+In my experience, the '-Wall' argument doesn't always produce excess warnings, however removing the '-Wall' argument never shows the excess warnings.  
        
-Now the currrent R version's global 'Makeconf' [at location: paste0(R.home("etc"), "/x64/Makeconf")] 'CXXFLAGS' contents are no longer replaced by the flags contents 
-in the temporaily created 'R_MAKEVARS_USER'. The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and only the compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents. It does this by having the 'flags' contents being more to the right in the 'g++' call than the 'Markeconf' 'CXXFLAGS' flags. (See the code.) This can leave a few vestigil flags in the call that are not used. Therefore, if important flags, now or in the future, are in the 'Makeconf' 'CXXFLAGS' contents they are no longer lost when extra arguments are added using the 'flags' argument.
+Note that the current R version's global 'Makeconf' [at location: paste0(R.home("etc"), "/x64/Makeconf")] 'CXXFLAGS' contents are no longer replaced by the flags contents in the temporarily created 'R_MAKEVARS_USER'. The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and only the compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents. It does this by having the 'flags' contents being more to the right in the 'g++' call than the 'Markeconf' 'CXXFLAGS' flags. This can leave a few vestigial flags in the call that are overridden. If important flags, now or in the future, are in the 'Makeconf' 'CXXFLAGS' contents they are no longer lost when extra arguments are added using the 'flags' argument.
     
        
 Please test this fork and report any issues, thanks.     
 
+
 Extra info
 
+I haven't actually done this (except the flags = " " does work), however it has now occurred to me:
 
+To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 'CXXFLAGS'contents, and have the default be to use none of the 'Makeconf' 'CXXFLAGS' contents, thus accomplishing the goal of getting rid of the '-Wall' flag, then that could be accomplished by in 2 steps. 1) Add a compile() argument 'Makeconf_global' with the default of FALSE. 2) Add the following two lines of code to the compile():
+
+     if(flags=="" & !Makeconf_global)
+          flags <- " "
 
 
