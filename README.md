@@ -41,8 +41,6 @@ To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 
      if(flags=="" & !Makeconf_global)
           flags <- " "
 
----
-
 ## High strangeness
 
 Submitting these 'g++' calls to a Windows 10 Command Window (cmd) and thus not using R, I have found the follwing:
