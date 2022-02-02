@@ -1,7 +1,7 @@
 Template Model Builder (TMB)
 ============================
 
-This fork adds control to the compile() function (found inside TMB.R) to obtain full control over the mingw64 g++ '-Wall' (warnings all) argument under Windows.
+This fork adds functionality to the compile() function (found inside TMB.R) to obtain full control over the mingw64 g++ '-Wall' (warnings all) argument under Windows.
 
 See TMB issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 )
 
