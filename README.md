@@ -27,7 +27,7 @@ In my experience, the '-Wall' argument doesn't always produce excess warnings, h
        
 Note that the current R version's global 'Makeconf' [at location: paste0(R.home("etc"), "/x64/Makeconf")] 'CXXFLAGS' contents are no longer replaced by the compile()'s 'flags' contents.  The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and only the compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents. This is done by having the 'flags' contents being more to the right than the 'Markeconf' 'CXXFLAGS' flags in the 'g++' call. (This can leave a few vestigial flags in the call that go unused.)   If important flags, now or in the future, are in 'Makeconf's 'CXXFLAGS' they are no longer lost when extra arguments are added using the 'flags' argument.
     
-Setting remove_arg_Wall = FALSE will not remove the '-Wall' flag.   
+Setting < remove_arg_Wall = FALSE > will retain the '-Wall' flag.   
        
 Please test this fork and report any issues, thanks.     
 
