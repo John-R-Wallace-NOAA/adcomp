@@ -65,12 +65,3 @@ And as everyone must have first tried, diverting with sink(..., type = "output")
      sink(type = "message")
      sink()
      file.show("all.Rout")
-     
-I can not find the function silence_warnings() mentioned by @kaskr in Issue 321.
-
-
-
-
-
-
-
