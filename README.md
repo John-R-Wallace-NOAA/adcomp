@@ -3,7 +3,7 @@ Template Model Builder (TMB)
 
 This fork adds functionality to the compile() function (found inside TMB.R) to obtain full control over the mingw64 g++ '-Wall' (warnings all) argument under Windows.
 
-See TMB issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 )
+See TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 )
 
 There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() function and the following changes are made around lines 1,100 to 1,116:
 
@@ -45,21 +45,32 @@ To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 
            if(flags=="" & !Makeconf_global)
                flags <- " "
 
-## High strangeness
+## Other notes
 
-Submitting these 'g++' calls to a Windows 10 Command Window (cmd) and thus not using R, I have found the follwing on my current PC setup (standard C:/rtools40/mingw64/bin/g++ install):
+Neither suppressWarnings() nor suppressMessages() works to suppress these exess warnings coming from a Windows cmd window with a 'g++' call:
 
-This call (from an older version of TMB) almost always gives excess warnings as one would expect with the '-Wall' flag:
+     library('TMB')
+     suppressWarnings(compile('simple.cpp')) # Doesn't work
+     suppressMessages(compile('simple.cpp')) # Doesn't work
+     
+And as everyone must have first tried, diverting with sink(..., type = "output") and sink(..., type = "message"), doesn't work either:  
 
-    "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MKL/MKL/include" -DNDEBUG -I"W:/MKL/MKL/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple         -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign -c simple.cpp -o simple.o
     
-This call, which still has the '-Wall' flag, with the only difference being an extra space between '-mstackrealign' and '-c', almost never gives excess warnings:
-    
-    "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
-    
-This call, with reduced spaces, more randomly sometimes gives excess warnings and sometimes not, when intermixed with other calls:
+     zz <- file("all.Rout", open = "wt")
+     sink(zz)
+     sink(zz, type = "message")
+     compile('simple.cpp')
+     
+     ## revert output back to the console -- only then access the file!
+     sink(type = "message")
+     sink()
+     file.show("all.Rout")
+     
+I can not find the function silence_warnings() mentioned by @kaskr in Issue 321.
 
-    "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
+
+
+
 
 
 
