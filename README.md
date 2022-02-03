@@ -35,9 +35,7 @@ Please test this fork and report any issues, thanks.
 
 ## Extra info
 
-I haven't actually done this (except that flags = " " does work); however it has now occurred to me that:
-
-To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 'CXXFLAGS'contents, and have the default be to use none of the 'Makeconf' 'CXXFLAGS' contents, thus accomplishing the goal of getting rid of the '-Wall' flag, then that could be accomplished in 2 steps. 
+To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 'CXXFLAGS'contents, and to have the default be to use none of the 'Makeconf' 'CXXFLAGS' contents, thus accomplishing the goal of getting rid of the '-Wall' flag, then that can be accomplished in 2 steps. 
 
 1) Add an argument 'Makeconf_global' to compile() with a default of FALSE. 
 
