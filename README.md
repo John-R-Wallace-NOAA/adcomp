@@ -32,7 +32,7 @@ Please test this fork and report any issues, thanks.
 
 ## Brute force method
 
-To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 'CXXFLAGS' contents, and to have a default that none of the 'Makeconf' 'CXXFLAGS' contents are used, thus accomplishing the goal of getting rid of the '-Wall' flag (along with any other CXXFLAGS), then that can be accomplished in 2 steps. 
+To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 'CXXFLAGS' contents, and to have a default that none of the global 'Makeconf' 'CXXFLAGS' contents are used, thus accomplishing the goal of getting rid of the '-Wall' flag (along with any other CXXFLAGS), then that can be accomplished in 2 steps. 
 
 1) Add an argument 'Makeconf_global' to compile() with a default of FALSE in TMB.R. 
 
