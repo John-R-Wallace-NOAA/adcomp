@@ -47,7 +47,7 @@ To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 
 
 ## Other notes
 
-Neither suppressWarnings() nor suppressMessages() works to suppress these exess warnings coming from a Windows cmd window with a 'g++' call:
+Neither suppressWarnings() nor suppressMessages() works to suppress these excess warnings coming from a Windows cmd window with a 'g++' call:
 
      library('TMB')
      suppressWarnings(compile('simple.cpp')) # Doesn't work
