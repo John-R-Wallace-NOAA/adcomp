@@ -53,7 +53,7 @@ This call (from an older version of TMB) almost always gives excess warnings as 
 
     "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MKL/MKL/include" -DNDEBUG -I"W:/MKL/MKL/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple         -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign -c simple.cpp -o simple.o
     
-This call, which still has the '-Wall' flag, with only an extra space between '-mstackrealign' and '-c', almost never gives excess warnings:
+This call, which still has the '-Wall' flag, with the only difference being an extra space between '-mstackrealign' and '-c', almost never gives excess warnings:
     
     "C:/rtools40/mingw64/bin/"g++ -std=gnu++11  -I"W:/MRO/MRO/include" -DNDEBUG -I"W:/MRO/MRO/library/TMB/include"   -DTMB_SAFEBOUNDS -DLIB_UNLOAD=R_unload_simple  -DTMB_LIB_INIT=R_init_simple          -O2 -Wall  -mfpmath=sse -msse2 -mstackrealign  -c simple.cpp -o simple.o
     
