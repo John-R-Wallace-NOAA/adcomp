@@ -19,7 +19,7 @@ There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() funct
         Makeconf_args_no_Wall <- character(0)
     mvfile <- makevars(PKG_CPPFLAGS=ppflags, PKG_LIBS=paste("$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
                      PKG_CXXFLAGS="$(SHLIB_OPENMP_CXXFLAGS)"[openmp],
-                     CXXFLAGS=sub(" $","", paste(Makeconf_args_global,flags[flags!=""])), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste()  here, not 'c()'.]
+                     CXXFLAGS=sub(" $","", paste(Makeconf_args_global,flags[flags!=""])), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste() here, not 'c()'.]
                      ...
                      )     
   
