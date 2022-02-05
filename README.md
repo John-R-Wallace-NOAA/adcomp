@@ -30,17 +30,9 @@ Please test this fork and report any issues, thanks.
 
 ---
 
-## Brute force method (for edification purposes - not recommended)
+## The flag: -Wno-ignored-attributes added 
 
-To have the compile()'s 'flags' argument continue to replace all the 'Makeconf' 'CXXFLAGS' contents, and to have a default that none of the global 'Makeconf' 'CXXFLAGS' contents are used, thus accomplishing the goal of getting rid of the '-Wall' flag (along with any other CXXFLAGS), then that can be accomplished in 2 steps. 
-
-1) Add an argument 'Makeconf_global' to compile() with a default of FALSE in TMB.R. 
-
-2) Add the following two lines of code to compile():
-
-
-           if(flags=="" & !Makeconf_global)
-               flags <- " "
+For the latest R versions (currently 4.2.1) the 'g++' compile call includes the RcppEigen package libraries: -I".../RcppEigen/include".  This causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument when run under Windows. Hence, if one is nostalgic for a screen full of warnings they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call. For the latest R versions there are no excess warnings if < del_args_Makeconf = "" >, however the default of < del_args_Makeconf = "-Wall" > has been kept for compatability with older R versions.
 
 ## Other notes
 
