@@ -9,7 +9,7 @@ The 'g++' compile() call includes the RcppEigen package libraries: -I".../RcppEi
 
 The issue with having the 'flags' argument's default not being an empty character string is that the R global Makeconf's CXXFLAGS are always overwritten; this issue is fixed below.  Note that this is increased functionality, since currently any flag given to the 'flags' argument removes all the global Makeconf's CXXFLAGS flags. (In the past, the Makeconf's CXXFLAGS flags could have been manually re-added to the 'flags' argument.)
 
-## Full control over R'S global Makeconf's CXXFLAGS entry under Windows 
+## Full control over R's global Makeconf's CXXFLAGS entry under Windows 
 
 There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() function and the following changes are made around lines 1,100 to 1,116:
 
