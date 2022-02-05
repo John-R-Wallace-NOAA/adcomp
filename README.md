@@ -30,7 +30,7 @@ Please test this fork and report any issues, thanks.
 
 ---
 
-## The flag: -Wno-ignored-attributes added 
+## The flag: < -Wno-ignored-attributes > added 
 
 For the latest R versions (currently 4.2.1) the 'g++' compile call includes the RcppEigen package libraries: -I".../RcppEigen/include".  This causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument when run under Windows. Hence, if one is nostalgic for a screen full of warnings they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call. For the latest R versions there are no excess warnings if < del_args_Makeconf = "" >, however the default of < del_args_Makeconf = "-Wall" > has been kept for compatability with older R versions.
 
