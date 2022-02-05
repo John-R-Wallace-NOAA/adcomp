@@ -11,28 +11,29 @@ The issue with having the 'flags' argument's default not being an empty characte
 
 ## Full control over the mingw64 g++ '-Wall' (warnings all) argument under Windows 
 
-There is a new argument, 'remove_arg_Wall' (default TRUE) in the compile() function and the following changes are made around lines 1,100 to 1,116:
+There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() function and the following changes are made around lines 1,100 to 1,116:
 
 
-    Makeconf_file <- paste0(R.home("etc"), "/x64/Makeconf")
-    if(file.exists(Makeconf_file)) {
-        Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
-        if(remove_arg_Wall)
-           Makeconf_args_no_Wall <- sub("-Wall", "", sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)]))
-        else
-          Makeconf_args_no_Wall <- sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])
-    } else
-        Makeconf_args_no_Wall <- character(0)
-    mvfile <- makevars(PKG_CPPFLAGS=ppflags, PKG_LIBS=paste("$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
-                     PKG_CXXFLAGS="$(SHLIB_OPENMP_CXXFLAGS)"[openmp],
-                     CXXFLAGS=sub(" $","", paste(Makeconf_args_global,flags[flags!=""])), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste() here, not 'c()'.]
-                     ...
-                     )     
+       Makeconf_file <- paste0(R.home("etc"), Sys.getenv("R_ARCH"), "/Makeconf")
+       if(file.exists(Makeconf_file)) {
+          Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
+          Makeconf_args_global <- sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])
+          if(del_args_Makeconf!="") {
+             for(i in del_args_Makeconf)
+              Makeconf_args_global <- sub(i, "", Makeconf_args_global)
+          }
+       } else
+          Makeconf_args_global <- character(0)
+       mvfile <- makevars(PKG_CPPFLAGS=ppflags, PKG_LIBS=paste("$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
+                          PKG_CXXFLAGS="$(SHLIB_OPENMP_CXXFLAGS)"[openmp],
+                          CXXFLAGS=paste(Makeconf_args_global,flags[flags!=""]), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste here, not 'c()'.]
+                          ...
+                          ) 
   
   
-The R's global 'Makeconf' is at location: paste0(R.home("etc"), "/x64/Makeconf"). With the code changes, this global Makeconf's 'CXXFLAGS' contents are no longer replaced by the compile()'s 'flags' contents.  The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and only '-Wall' is removed when 'remove_arg_Wall = TRUE'. Only the compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents (e.g. '-O1' in 'flags' would override the default '-O2' flag). This is done by having the 'flags' contents being more to the right than the 'Markeconf' 'CXXFLAGS' flags in the 'g++' call. (This can leave a few vestigial flags in the call that go unused.) Note that if important flags, now or in the future, are in 'Makeconf's 'CXXFLAGS' they are no longer lost when extra arguments are added using the 'flags' argument.
+The R's global 'Makeconf' location is at: paste0(R.home("etc"), "/x64/Makeconf"). The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and flags equal to those in the 'del_args_Makeconf' argument are removed. The compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents, e.g. '-O1' in 'flags' would override the default '-O2' flag. This is done by having the 'flags' contents being more to the right than the remaining 'Markeconf' 'CXXFLAGS' flags in the 'g++' call. (This can leave a few vestigial flags in the call that go unused.) Note that if important flags, now or in the future, are in 'Makeconf's 'CXXFLAGS' they are no longer lost when the 'flags' argument is used.
     
-For standard CRAN R, with the < -Wno-ignored-attributes > flag added there are no excess warnings if < del_args_Makeconf = "" >, however < del_args_Makeconf = "-Wall" > is needed for R versions for which Intel's MKL libraries have been added, see:
+For standard CRAN R, with the < -Wno-ignored-attributes > flag added, there are no excess warnings if < del_args_Makeconf = "" >, however < del_args_Makeconf = "-Wall" > is needed for R versions for which Intel's MKL libraries have been added (there are no excess warnings in MRO it appears), see:
 
 https://github.com/John-R-Wallace-NOAA/R_4.X_MRO_Windows_and_R_MKL_Linux
 
