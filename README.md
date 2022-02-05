@@ -31,7 +31,7 @@ There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() 
                           ) 
   
   
-The R's global 'Makeconf' location is at: paste0(R.home("etc"), "/x64/Makeconf"). The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and flags equal to those in the 'del_args_Makeconf' argument are removed. The compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents, e.g. '-O1' in 'flags' would override the default '-O2' flag. This is done by having the 'flags' contents being more to the right than the remaining 'Markeconf' 'CXXFLAGS' flags in the 'g++' call. (This can leave a few vestigial flags in the call that go unused.) Note that if important flags, now or in the future, are in 'Makeconf's 'CXXFLAGS' they are no longer lost when the 'flags' argument is used.
+The 'Makeconf' 'CXXFLAGS' contents are scan()'ed in and flags equal to those in the 'del_args_Makeconf' argument are removed. The compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents, e.g. '-O1' in 'flags' would override the default '-O2' flag. This is done by having the 'flags' contents being more to the right than the remaining 'Markeconf' 'CXXFLAGS' flags in the 'g++' call. (This can leave a few vestigial flags in the call that go unused.) Note that if important flags, now or in the future, are in 'Makeconf's 'CXXFLAGS' they are no longer lost when the 'flags' argument is used.
     
 For standard CRAN R, with the < -Wno-ignored-attributes > flag added, there are no excess warnings if < del_args_Makeconf = "" >, however < del_args_Makeconf = "-Wall" > is needed for R versions for which Intel's MKL libraries have been added (there are no excess warnings in MRO it appears), see:
 
