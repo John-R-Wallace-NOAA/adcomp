@@ -5,7 +5,7 @@ See TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-102
 
 ## The flag: < -Wno-ignored-attributes > added 
 
-The 'g++' compile call includes the RcppEigen package libraries: -I".../RcppEigen/include" which causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument when run under Windows. Hence, if one is nostalgic for a screen full of warnings they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call. 
+The 'g++' compile call includes the RcppEigen package libraries: -I".../RcppEigen/include" which causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument when run under Windows. If one is nostalgic for a screen full of warnings they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call. 
 
 The issue with having the 'flags' argument's default not being an empty character string is that the R global Makeconf's CXXFLAGS are always overwritten; this issue is fixed below.  Note that this is increased functionality, since currently any flag given to the 'flags' argument removes all the global Makeconf's CXXFLAGS flags. (The Makeconf's CXXFLAGS flags could have been manually re-added to the 'flags' argument.)
 
