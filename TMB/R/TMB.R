@@ -1012,7 +1012,7 @@ openmp <- function(n=NULL){
 ##' @param tracesweep Turn on preprocessor flag to trace AD sweeps? (Silently disables \code{libtmb})
 ##' @param ... Passed as Makeconf variables.
 ##' @seealso \code{\link{precompile}}
-compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
+compile <- function(file,flags="-Wno-ignored-attributes",safebounds=TRUE,safeunload=TRUE,
                     openmp=isParallelTemplate(file[1]),libtmb=TRUE,
                     libinit=TRUE,tracesweep=FALSE,remove_arg_Wall = TRUE,...){  
   if(.Platform$OS.type=="windows"){
