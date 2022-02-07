@@ -2,7 +2,7 @@ Template Model Builder (TMB)
 ============================
 This fork addresses the TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 ) of excess warnings when TMB is running under Windows.
 
-## The flag: < -Wno-ignored-attributes > added 
+## The flag: < -Wno-ignored-attributes > added to the 'flags' argument under Windows
 
 The 'g++' compile() call includes the RcppEigen package libraries: -I".../RcppEigen/include" which causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument when run under Windows. If one is nostalgic for a screen full of warnings, they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call. 
 
