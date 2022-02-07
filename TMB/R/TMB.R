@@ -1096,23 +1096,22 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
                    paste0("-DLIB_UNLOAD=R_unload_",libname)[safeunload],
                    "-DWITH_LIBTMB"[libtmb],
                    paste0("-DTMB_LIB_INIT=R_init_",libname)[libinit],
-                   "-DCPPAD_FORWARD0SWEEP_TRACE"[tracesweep]
+                   sub(" $","","-DCPPAD_FORWARD0SWEEP_TRACE"[tracesweep])
                    )
   ## Makevars specific for template
-  Makeconf_file <- paste0(R.home("etc"), "/x64/Makeconf")
+  Makeconf_file <- paste0(R.home("etc"), Sys.getenv("R_ARCH"), "/Makeconf")
   if(file.exists(Makeconf_file)) {
      Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
-     if(remove_arg_Wall)
-        Makeconf_args_no_Wall <- sub("-Wall", "", sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)]))
-     else
-       Makeconf_args_no_Wall <- sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])
+     Makeconf_args_global <- sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])
+     if(del_args_Makeconf!="") {
+        for(i in del_args_Makeconf)
+         Makeconf_args_global <- sub(i, "", Makeconf_args_global)
+     }
   } else
-     Makeconf_args_no_Wall <- character(0)
-  mvfile <- makevars(PKG_CPPFLAGS=ppflags,
-                     PKG_LIBS=paste(
-                       "$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
+     Makeconf_args_global <- character(0)
+  mvfile <- makevars(PKG_CPPFLAGS=ppflags, PKG_LIBS=paste("$(SHLIB_OPENMP_CXXFLAGS)"[openmp] ),
                      PKG_CXXFLAGS="$(SHLIB_OPENMP_CXXFLAGS)"[openmp],
-                     CXXFLAGS=paste(Makeconf_args_no_Wall,flags[flags!=""]), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste() here, not 'c()'.]
+                     CXXFLAGS=paste(Makeconf_args_global,flags[flags!=""]), ## Now flags overrides only the Makeconf cxxflags that are the same. [Need paste here, not 'c()'.]
                      ...
                      )
   on.exit(file.remove(mvfile),add=TRUE)
