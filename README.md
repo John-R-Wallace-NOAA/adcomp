@@ -1,7 +1,6 @@
 Template Model Builder (TMB)
 ============================
-
-See TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 )
+This fork addresses the TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 ) of excess warnings when TMB is running under Windows.
 
 ## The flag: < -Wno-ignored-attributes > added 
 
