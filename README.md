@@ -34,7 +34,7 @@ There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() 
 - The compile()'s 'flags' argument(s) that are the same override the 'Makeconf' 'CXXFLAGS' contents, e.g. '-O1' in 'flags' would override the default '-O2' flag. This is done by having the 'flags' contents being more to the right than the remaining 'Markeconf' 'CXXFLAGS' flags in the 'g++' call. 
 - This can leave a few vestigial flags in the call that go unused. To avoid this, the 'del_args_Makeconf' argument could be set to c("-Wall", "-O2") in the example above.
 - Note that if important flags, now or in the future, are in 'Makeconf's 'CXXFLAGS' they are no longer lost when the 'flags' argument is used.
-- For standard CRAN R, with the < -Wno-ignored-attributes > flag added, there are currently no excess warnings if < del_args_Makeconf = "" >, however < del_args_Makeconf = "-Wall" > may be needed in the future.
+- For standard CRAN R, with the < -Wno-ignored-attributes > flag added, there are currently no excess warnings if < del_args_Makeconf = "" >, however < del_args_Makeconf = "-Wall" > may be needed in the future and so it has been left as the default.
 - Also, < del_args_Makeconf = "-Wall" > is needed for R versions for which Intel's MKL libraries have been added (there are no excess warnings in MRO it appears), see: https://github.com/John-R-Wallace-NOAA/R_4.X_MRO_Windows_and_R_MKL_Linux
 - The help is not yet updated.
 
