@@ -1022,7 +1022,7 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
       chartr("\\", "/", shortPathName(ans))
     }
     ## Ignore RcppEigen attributes warning under Windows. Temporarily reinstate warnings with flags = "-Wignored-attributes".
-    flags <- paste0("-Wno-ignored-attributes", " ", flags)
+    flags <- paste0("-Wno-ignored-attributes", " ", paste(flags, collapse = " "))
   }
   qsystem.file <- function(...) {
       paste0('"', system.file(...), '"')
