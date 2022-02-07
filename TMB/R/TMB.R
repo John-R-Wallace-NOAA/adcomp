@@ -1103,7 +1103,7 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
   if(file.exists(Makeconf_file)) {
      Makeconf <- scan(Makeconf_file, what = "", sep = "\n", quiet = TRUE)
      Makeconf_args_global <- sub("CXXFLAGS = ", "", Makeconf[grep("^CXXFLAGS", Makeconf)])
-     if(del_args_Makeconf!="") {
+     if(length(del_args_Makeconf)>1 || del_args_Makeconf!="") {
         for(i in del_args_Makeconf)
          Makeconf_args_global <- sub(i, "", Makeconf_args_global)
      }
