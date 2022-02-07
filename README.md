@@ -10,7 +10,7 @@ The issue with having the 'flags' argument's default not being an empty characte
 
 ## Full control over R's global Makeconf's CXXFLAGS entry under Windows 
 
-There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() function and the following changes are made around lines 1,100 to 1,116:
+There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() function and the following changes are made around lines 1,100 to 1,116 of the TMB.R file:
 
 
        Makeconf_file <- paste0(R.home("etc"), Sys.getenv("R_ARCH"), "/Makeconf")
