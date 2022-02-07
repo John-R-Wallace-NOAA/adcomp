@@ -43,7 +43,7 @@ Please test this fork and report any issues, thanks.
 
 ---
 
-## Informtion on the other CXXFLAGS in Makeconf
+## Information on the other CXXFLAGS in Makeconf
 
 
  -mfpmath is for generating floating point arithmetics for the selected unit (sse): https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html
