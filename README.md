@@ -43,6 +43,16 @@ Please test this fork and report any issues, thanks.
 
 ---
 
+## Informtion on the other CXXFLAGS in Makeconf
+
+
+ -mfpmath is for generating floating point arithmetics for the selected unit (sse): https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html
+ 
+ -mstackrealign realigns the runtime stack if necessary: https://stackoverflow.com/questions/2386408/qt-gcc-sse-and-stack-alignment
+
+
+---
+
 ## Other notes
 
 Neither suppressWarnings() nor suppressMessages() works to suppress these excess warnings coming from a Windows cmd window with a 'g++' call:
