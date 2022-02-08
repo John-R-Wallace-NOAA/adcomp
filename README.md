@@ -20,10 +20,11 @@ When the "Eigen" library doesn't exist, there are now two parts added to the 'g+
      -I"W:/R/R-4.1.2/library/RcppEigen/include" -Wno-ignored-attributes
               
                        
-Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include. (Adding to the ephemeral nature of these excess warnings.)
- 
+Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include. (Adding to the ephemeral nature of these excess warnings.)  Therefore, to test this TMB fork, TMB/include/Eigen can be renamed to something else besides 'Eigen' to simulate a CRAN TMB install that does not include TMB/include/Eigen. Another approach is to source R/TMB.R (which contains the compile() function) from this repo into your global environment in an R session where CRAN TMB is being used. There are no issues with this overloading approach for testing purposes, and the excess warnings from the CRAN TMB installation will be gone. 
+
 This change is compatible with TMB running under R on Linux.
 
+---
 
 As a side note, using the '-w' flag (note the lower case) in the flags argument of compile() will remove all warnings, e.g.:
 
