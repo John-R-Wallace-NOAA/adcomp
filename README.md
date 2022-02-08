@@ -24,7 +24,7 @@ When the "Eigen" library doesn't exist, there are now two parts added to the 'g+
                        
 Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include. (Adding to the ephemeral nature of these excess warnings.)  Therefore, to test this TMB fork, TMB/include/Eigen needs to be renamed to something else besides 'Eigen' to simulate a CRAN TMB install that does not include TMB/include/Eigen. Doing this Eigen renaming with a current GitHub TMB installation will give the excess warnings under Windows.
 
-Another approach is to source R/TMB.R (which contains the compile() function) from this repo into your global environment in an R session where CRAN TMB is being used. There are no issues with this overloading approach for testing purposes, and the excess warnings from the CRAN TMB installation will be gone. 
+Another approach is to source R/TMB.R from this repo into your global environment in an R session where CRAN TMB is being used. There are no issues with this overloading approach for testing purposes, and the excess warnings from the CRAN TMB installation will be gone. 
 
 This change is compatible with TMB running under R on Linux.
 
