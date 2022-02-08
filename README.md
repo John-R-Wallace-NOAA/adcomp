@@ -8,12 +8,12 @@ I have added flag: "-Wno-ignored-attributes" to the compile() function to elimin
       useRcppEigen <- !file.exists( system.file("include/Eigen",package="TMB") )  # TRUE when TMB/include/Eigen does not exist.
       useContrib   <-  file.exists( system.file("include/contrib",package="TMB") )
       ppflags <- paste(paste0("-I",qsystem.file("include",package="TMB")),
-                   # The CRAN install of TMB doesn't install the "Eigen" library (nor the TMBad library) in TMB/include.
-                   # When there is no 'Eigen' library, the next line instructs the 'g++' call to use the 'RcppEigen' package instead.
-                   paste0("-I",qsystem.file("include",package="RcppEigen"))[useRcppEigen], 
-                   "-Wno-ignored-attributes"[useRcppEigen], # Needed to remove excess warnings under Windows when the 'RcppEigen' package is used.
-                   paste0("-I",qsystem.file("include/contrib",package="TMB"))[useContrib],
-                       ...
+               # The CRAN install of TMB doesn't install the "Eigen" library (nor the TMBad library) in TMB/include.
+               # When there is no 'Eigen' library, the next line instructs the 'g++' call to use the 'RcppEigen' package instead.
+               paste0("-I",qsystem.file("include",package="RcppEigen"))[useRcppEigen], 
+               -Wno-ignored-attributes"[useRcppEigen], # Needed to remove excess warnings under Windows when the 'RcppEigen' package is used.
+               paste0("-I",qsystem.file("include/contrib",package="TMB"))[useContrib],
+               ...
               
 When the "Eigen" library doesn't exist, now there are two parts added to the 'g++' call; previously only the first option was added.
     
