@@ -20,6 +20,6 @@ When the "Eigen" library doesn't exist, now there are two parts added to the 'g+
      -I"W:/R/R-4.1.2/library/RcppEigen/include" -Wno-ignored-attributes
               
                        
- Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include, which 'TMB.hpp' expects to be there.
+ Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include.
  
  
