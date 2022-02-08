@@ -11,7 +11,7 @@ I have added flag: "-Wno-ignored-attributes" to the compile() function to elimin
                # The CRAN install of TMB doesn't install the "Eigen" library (nor the TMBad library) in TMB/include.
                # When there is no 'Eigen' library, the next line instructs the 'g++' call to use the 'RcppEigen' package instead.
                paste0("-I",qsystem.file("include",package="RcppEigen"))[useRcppEigen], 
-               -Wno-ignored-attributes"[useRcppEigen], # Needed to remove excess warnings under Windows when the 'RcppEigen' package is used.
+               -Wno-ignored-attributes"[useRcppEigen], # Removes excess warnings under Windows when the 'RcppEigen' package is used.
                paste0("-I",qsystem.file("include/contrib",package="TMB"))[useContrib],
                ...
               
