@@ -2,7 +2,7 @@ Template Model Builder (TMB)
 ============================
 This fork addresses the TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 ) of excess warnings when TMB is running under Windows.
 
-I have added flag: "-Wno-ignored-attributes" to the compile() function (located in R/TMB.R) to eliminate the warnings when needed. See the comments in the code snippet below which is setting up options for the 'g++' call:
+I have added flag: "-Wno-ignored-attributes" to the compile() function (located in R/TMB.R) to eliminate the warnings when necessary. See the comments in the code snippet below which is setting up options for the 'g++' call:
 
 
       useRcppEigen <- !file.exists( system.file("include/Eigen",package="TMB") )  # TRUE when TMB/include/Eigen does not exist.
