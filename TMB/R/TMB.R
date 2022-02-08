@@ -1317,7 +1317,8 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
   useRcppEigen <- !file.exists( system.file("include/Eigen",package="TMB") )
   useContrib   <-  file.exists( system.file("include/contrib",package="TMB") )
   ppflags <- paste(paste0("-I",qsystem.file("include",package="TMB")),
-                   # Next line is used to keep TMB/include/TMB.hpp happy when there is no 'Eigen' library in TMB/include. The CRAN install of TMB doesn't install the "Eigen" library (nor the TMBad library).
+                   # The CRAN install of TMB doesn't install the "Eigen" library (nor the TMBad library) in TMB/include.
+                   # The next line is used to keep TMB/include/TMB.hpp happy when there is no 'Eigen' library. 
                    paste0("-I",qsystem.file("include",package="RcppEigen"))[useRcppEigen], 
                    "-Wno-ignored-attributes"[useRcppEigen], # Needed to remove excess warnings when the above line is used.
                    paste0("-I",qsystem.file("include/contrib",package="TMB"))[useContrib],
