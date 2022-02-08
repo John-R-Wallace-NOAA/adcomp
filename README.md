@@ -30,4 +30,4 @@ As a side note, using the '-w' flag (note the lower case) in the flags argument 
 
     compile('linreg_parallel.cpp', '-w')
 
-Of course, such a global removal of warnings needs to used with caution.
+Of course, such a global removal of warnings needs to be used with caution.
