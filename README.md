@@ -22,4 +22,4 @@ When the "Eigen" library doesn't exist, there are now two parts added to the 'g+
                        
  Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include.
  
- 
+This change is compatible with TMB running under R on Linux.
