@@ -23,3 +23,10 @@ When the "Eigen" library doesn't exist, there are now two parts added to the 'g+
  Installing TMB from GitHub does add both the "Eigen" and "TMBad" libraries to TMB/include.
  
 This change is compatible with TMB running under R on Linux.
+
+
+As a side note, using the '-w' flag (note the lower case) in the flags argument of compile() will remove all warnings, e.g.:
+
+    compile('linreg_parallel.cpp', '-w')
+
+Of course, such a global removal of warnings needs to used with caution.
