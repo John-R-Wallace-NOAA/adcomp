@@ -15,7 +15,7 @@ I have added flag: "-Wno-ignored-attributes" to the compile() function to elimin
                    paste0("-I",qsystem.file("include/contrib",package="TMB"))[useContrib],
                        ...
               
-When the "Eigen" library doesn't exist, now there are two parts added to the 'g++' call, previously only the first option was added.
+When the "Eigen" library doesn't exist, now there are two parts added to the 'g++' call; previously only the first option was added.
     
      -I"W:/R/R-4.1.2/library/RcppEigen/include" -Wno-ignored-attributes
               
