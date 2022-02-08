@@ -1314,7 +1314,7 @@ compile <- function(file,flags="",safebounds=TRUE,safeunload=TRUE,
     if(!is(tr,"try-error"))cat("Note: Library",paste0("'",dynlib(libname),"'"),"was unloaded.\n")
   }
   ## Includes and preprocessor flags specific for the template
-  useRcppEigen <- !file.exists( system.file("include/Eigen",package="TMB") )
+  useRcppEigen <- !file.exists( system.file("include/Eigen",package="TMB") ) # TRUE when TMB/include/Eigen does not exist.
   useContrib   <-  file.exists( system.file("include/contrib",package="TMB") )
   ppflags <- paste(paste0("-I",qsystem.file("include",package="TMB")),
                    # The CRAN install of TMB doesn't install the "Eigen" library (nor the TMBad library) in TMB/include.
