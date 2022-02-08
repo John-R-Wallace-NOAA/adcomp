@@ -2,9 +2,11 @@ Template Model Builder (TMB)
 ============================
 This fork addresses the TMB Issue 321  ( https://github.com/kaskr/adcomp/issues/321#issuecomment-1022628013 ) of excess warnings when TMB is running under Windows.
 
+The excess warnings only happen when TMB is installed via CRAN and the RcppEigen package libraries are included in the 'g++' call (see below).  The RcppEigen package libraries are not included in the 'g++' call when TMB is installed from GitHub. (Perhaps the RcppEigen package libraries could be removed from the CRAN version?) Oddly, this means that this fork can not be fully tested as a downloaded package from GitHub since then the RcppEigen package libraries are not included in the 'g++' call and there are no excess warnings. However, there appears to no compiling issues when this package's 'TMB.R' (which contains the compile() function) is sourced into the global environment (.GlobalEnv) and it overloads the CRAN TMB version with the excess warnings.  Please test this fork in that way and report any issues, thanks.
+
 ## The flag: < -Wno-ignored-attributes > added to the 'flags' argument under Windows
 
-The 'g++' compile() call includes the RcppEigen package libraries: -I".../RcppEigen/include" which causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument early in the compile() function when run under Windows. (If one is nostalgic for a screen full of warnings, they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call.)
+When TMB is downloaded from CRAN the 'g++' compile() call includes the RcppEigen package libraries: -I".../RcppEigen/include" which causes warnings about ignoring attributes on template arguments. The '-Wno-ignored-attributes' flag stops those warnings and is added to the beginning of the 'flags' argument early in the compile() function when run under Windows. (If one is nostalgic for a screen full of warnings, they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call.)
 
 The issue with having the 'flags' argument's default not being an empty character string later in the compile() function, is that the R global Makeconf's CXXFLAGS would always be overwritten; this issue is fixed below.  Note that this is increased functionality, since currently any flag given to the 'flags' argument removes all the global Makeconf's CXXFLAGS flags. (The Makeconf's CXXFLAGS flags could have been manually re-added to the 'flags' argument.)
 
@@ -38,9 +40,7 @@ There is a new argument, 'del_args_Makeconf' (default "-Wall") in the compile() 
 - Also, < del_args_Makeconf = "-Wall" > is needed for R versions for which Intel's MKL libraries have been added (there are no excess warnings in MRO it appears), see: https://github.com/John-R-Wallace-NOAA/R_4.X_MRO_Windows_and_R_MKL_Linux
 - The help is not yet updated.
 
-    
-Please test this fork and report any issues, thanks.     
-
+  
 ---
 
 ## Information on the other CXXFLAGS in Makeconf
