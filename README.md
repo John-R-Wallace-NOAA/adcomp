@@ -30,8 +30,23 @@ This change is compatible with TMB running under R on Linux.
 
 ---
 
+If one is nostalgic for a screen full of warnings, they can be temporarily reinstated with < flags = "-Wignored-attributes" > in the compile() call:
+
+     compile('linreg_parallel.cpp', flags = "-Wignored-attributes")    
+     
+This works since the flags in the 'flags' argument are more to the right in the 'g++' call.     
+
+
+
+
+
+---
+
 As a side note, using the '-w' flag (note the lower case) in the flags argument of compile() will remove all warnings, e.g.:
 
     compile('linreg_parallel.cpp', '-w')
+    
+    compile('linreg_parallel.cpp', flags = "-Wignored-attributes -w")
+
 
 Of course, such a global removal of warnings needs to be used with caution.
